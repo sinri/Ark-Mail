@@ -11,6 +11,11 @@ namespace sinri\ark\email;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+/**
+ * Class ArkSMTPMailer
+ * @package sinri\ark\email
+ * updated @since 1.2
+ */
 class ArkSMTPMailer implements ArkMailer
 {
     private $phpMailerInstance;
@@ -80,17 +85,6 @@ class ArkSMTPMailer implements ArkMailer
             )
         );
         return $this;
-    }
-
-
-    /**
-     * @deprecated use method `prepare` instead
-     * @param null $error
-     * @return ArkMailer
-     */
-    public function prepareSMTP(&$error = null)
-    {
-        return $this->prepare($error);
     }
 
     /**

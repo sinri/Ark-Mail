@@ -11,6 +11,11 @@ namespace sinri\ark\email;
 
 use sinri\ark\core\ArkHelper;
 
+/**
+ * Class ArkSMTPMailerConfig
+ * @package sinri\ark\email
+ * @since 1.2
+ */
 class ArkSMTPMailerConfig
 {
     protected $host;
