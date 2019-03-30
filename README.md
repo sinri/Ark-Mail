@@ -1,4 +1,8 @@
 # Ark-Mail
+
+![GitHub Version](https://img.shields.io/github/release/sinri/Ark-Mail.svg)
+![Packagist Version](https://img.shields.io/packagist/v/sinri/Ark-Mail.svg)
+
 The Email Component for Ark 2
 
 ## Upgrade Design
