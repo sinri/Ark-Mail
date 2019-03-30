@@ -10,28 +10,25 @@ namespace sinri\ark\email;
 
 
 use PHPMailer\PHPMailer\PHPMailer;
-use sinri\ark\core\ArkHelper;
-
-//use sinri\smallphpmailer\library\PHPMailer;
 
 class ArkSMTPMailer implements ArkMailer
 {
     private $phpMailerInstance;
-    private $smtpInfo;
     protected $availableAddressList = null;
+    /**
+     * @var ArkSMTPMailerConfig
+     */
+    private $smtpConfig;
 
     /**
      * LibMail constructor.
-     * @param $params
+     * @param ArkSMTPMailerConfig $smtpConfig
      *
      * host,smtp_auth,username,password,smtp_secure,port,display_name
      */
-    public function __construct($params = [])
+    public function __construct($smtpConfig)
     {
-        $this->smtpInfo = [];
-
-        $this->setUpSMTP($params);
-
+        $this->smtpConfig = $smtpConfig;
         $this->phpMailerInstance = new PHPMailer();
     }
 
@@ -42,20 +39,6 @@ class ArkSMTPMailer implements ArkMailer
     public function setReceiverLimitation($emails)
     {
         $this->availableAddressList = $emails;
-    }
-
-    /**
-     * @param array $params
-     */
-    public function setUpSMTP($params)
-    {
-        $this->smtpInfo['host'] = ArkHelper::readTarget($params, 'host', '');
-        $this->smtpInfo['smtp_auth'] = ArkHelper::readTarget($params, 'smtp_auth', '');
-        $this->smtpInfo['username'] = ArkHelper::readTarget($params, 'username', '');
-        $this->smtpInfo['password'] = ArkHelper::readTarget($params, 'password', '');
-        $this->smtpInfo['smtp_secure'] = ArkHelper::readTarget($params, 'smtp_secure', '');
-        $this->smtpInfo['port'] = ArkHelper::readTarget($params, 'port', '');
-        $this->smtpInfo['display_name'] = ArkHelper::readTarget($params, 'display_name', '');
     }
 
     /**
@@ -118,14 +101,14 @@ class ArkSMTPMailer implements ArkMailer
     {
         try {
             $this->phpMailerInstance = new PHPMailer();
-            $this->phpMailerInstance->Host = $this->smtpInfo['host'];// Specify main and backup SMTP servers
-            $this->phpMailerInstance->SMTPAuth = $this->smtpInfo['smtp_auth'];// Enable SMTP authentication
-            $this->phpMailerInstance->Username = $this->smtpInfo['username'];// SMTP username
-            $this->phpMailerInstance->Password = $this->smtpInfo['password'];// SMTP password
-            $this->phpMailerInstance->SMTPSecure = $this->smtpInfo['smtp_secure'];// Enable TLS encryption, `ssl` also accepted
-            $this->phpMailerInstance->Port = $this->smtpInfo['port'];// TCP port to connect to
+            $this->phpMailerInstance->Host = $this->smtpConfig->getHost();// Specify main and backup SMTP servers
+            $this->phpMailerInstance->SMTPAuth = $this->smtpConfig->getSmtpAuth();// Enable SMTP authentication
+            $this->phpMailerInstance->Username = $this->smtpConfig->getUsername();// SMTP username
+            $this->phpMailerInstance->Password = $this->smtpConfig->getPassword();// SMTP password
+            $this->phpMailerInstance->SMTPSecure = $this->smtpConfig->getSmtpSecure();// Enable TLS encryption, `ssl` also accepted
+            $this->phpMailerInstance->Port = $this->smtpConfig->getPort();// TCP port to connect to
 
-            $this->phpMailerInstance->setFrom($this->smtpInfo['username'], $this->smtpInfo['display_name']);
+            $this->phpMailerInstance->setFrom($this->smtpConfig->getUsername(), $this->smtpConfig->getDisplayName());
 
             $this->phpMailerInstance->isSMTP();
         } catch (\Exception $exception) {

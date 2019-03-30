@@ -18,5 +18,11 @@
     "psr-4": {
       "sinri\\ark\\email\\": "src/"
     }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.laravel-china.org"
+    }
   }
 }

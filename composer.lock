@@ -4,21 +4,27 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "97c0e54a1d970e2b5d611efc6d8fd95a",
+  "content-hash": "34051878e396a6e2c6c38da5950895cb",
   "packages": [
     {
       "name": "phpmailer/phpmailer",
-      "version": "v6.0.5",
+      "version": "v6.0.7",
       "source": {
         "type": "git",
         "url": "https://github.com/PHPMailer/PHPMailer.git",
-        "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32"
+        "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cb3ea134d4d3729e7857737d5f320cce9caf4d32",
-        "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32",
-        "shasum": ""
+        "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/0c41a36d4508d470e376498c1c0c527aa36a2d59",
+        "reference": "0c41a36d4508d470e376498c1c0c527aa36a2d59",
+        "shasum": "",
+        "mirrors": [
+          {
+            "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+            "preferred": true
+          }
+        ]
       },
       "require": {
         "ext-ctype": "*",
@@ -70,21 +76,27 @@
         }
       ],
       "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-      "time": "2018-03-27T13:49:45+00:00"
+      "time": "2019-02-01T15:04:28+00:00"
     },
     {
       "name": "psr/log",
-      "version": "1.0.2",
+      "version": "1.1.0",
       "source": {
         "type": "git",
         "url": "https://github.com/php-fig/log.git",
-        "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+        "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-        "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-        "shasum": ""
+        "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+        "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+        "shasum": "",
+        "mirrors": [
+          {
+            "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+            "preferred": true
+          }
+        ]
       },
       "require": {
         "php": ">=5.3.0"
@@ -117,21 +129,27 @@
         "psr",
         "psr-3"
       ],
-      "time": "2016-10-10T12:19:37+00:00"
+      "time": "2018-11-20T15:27:04+00:00"
     },
     {
       "name": "sinri/ark-core",
-      "version": "1.1",
+      "version": "2.1.1",
       "source": {
         "type": "git",
         "url": "https://github.com/sinri/Ark-Core.git",
-        "reference": "f47f233063a96d4d42ba8617e4d04615e0819623"
+        "reference": "88054fda2886993b1fe826d197ab44101900f32c"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sinri/Ark-Core/zipball/f47f233063a96d4d42ba8617e4d04615e0819623",
-        "reference": "f47f233063a96d4d42ba8617e4d04615e0819623",
-        "shasum": ""
+        "url": "https://api.github.com/repos/sinri/Ark-Core/zipball/88054fda2886993b1fe826d197ab44101900f32c",
+        "reference": "88054fda2886993b1fe826d197ab44101900f32c",
+        "shasum": "",
+        "mirrors": [
+          {
+            "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+            "preferred": true
+          }
+        ]
       },
       "require": {
         "ext-json": "*",
@@ -154,7 +172,7 @@
         }
       ],
       "description": "The core components of Ark 2",
-      "time": "2018-09-06T17:03:51+00:00"
+      "time": "2019-03-17T14:58:30+00:00"
     }
   ],
   "packages-dev": [],
