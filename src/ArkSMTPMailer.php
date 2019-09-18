@@ -9,6 +9,7 @@
 namespace sinri\ark\email;
 
 
+use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
@@ -65,6 +66,16 @@ class ArkSMTPMailer implements ArkMailer
     }
 
     /**
+     * @param string $charset PHPMailer::CHARSET_ISO88591 | CHARSET_UTF8
+     * @return $this
+     */
+    public function setCharset($charset)
+    {
+        $this->phpMailerInstance->CharSet = $charset;
+        return $this;
+    }
+
+    /**
      * If you are using OSX and PHP 5.6 and find error in debug, you might try on this.
      * This is the solution given by PHPMail Official GitHub Developer.
      *
@@ -102,10 +113,12 @@ class ArkSMTPMailer implements ArkMailer
             $this->phpMailerInstance->SMTPSecure = $this->smtpConfig->getSmtpSecure();// Enable TLS encryption, `ssl` also accepted
             $this->phpMailerInstance->Port = $this->smtpConfig->getPort();// TCP port to connect to
 
+            $this->phpMailerInstance->CharSet = PHPMailer::CHARSET_UTF8;
+
             $this->phpMailerInstance->setFrom($this->smtpConfig->getUsername(), $this->smtpConfig->getDisplayName());
 
             $this->phpMailerInstance->isSMTP();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // who care?
             $error = $exception->getMessage();
         }
@@ -114,7 +127,7 @@ class ArkSMTPMailer implements ArkMailer
 
     private function turnHTML2TEXT($html)
     {
-        $html = preg_replace('/\<[Bb][Rr] *\/?\>/', PHP_EOL, $html);
+        $html = preg_replace('/<[Bb][Rr] *\/?>/', PHP_EOL, $html);
         $html = strip_tags($html);
         return $html;
     }
@@ -218,12 +231,10 @@ class ArkSMTPMailer implements ArkMailer
     {
         try {
             $done = $this->phpMailerInstance->send();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $done = false;
         }
         $error = $this->phpMailerInstance->ErrorInfo;
         return $done;
     }
-
-
 }
