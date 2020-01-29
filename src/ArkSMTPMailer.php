@@ -139,7 +139,7 @@ class ArkSMTPMailer implements ArkMailer
      */
     public function addReceiver($address, $name = '')
     {
-        if ($this->availableAddressList === null || !in_array($address, $this->availableAddressList))
+        if ($this->availableAddressList === null || in_array($address, $this->availableAddressList))
             $this->phpMailerInstance->addAddress($address, $name);
         return $this;
     }
@@ -162,7 +162,7 @@ class ArkSMTPMailer implements ArkMailer
      */
     public function addCCAddress($address, $name)
     {
-        if ($this->availableAddressList === null || !in_array($address, $this->availableAddressList))
+        if ($this->availableAddressList === null || in_array($address, $this->availableAddressList))
             $this->phpMailerInstance->addCC($address, $name);
         return $this;
     }
@@ -174,7 +174,7 @@ class ArkSMTPMailer implements ArkMailer
      */
     public function addBCCAddress($address, $name)
     {
-        if ($this->availableAddressList === null || !in_array($address, $this->availableAddressList))
+        if ($this->availableAddressList === null || in_array($address, $this->availableAddressList))
             $this->phpMailerInstance->addBCC($address, $name);
         return $this;
     }
