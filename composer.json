@@ -12,7 +12,7 @@
   "minimum-stability": "stable",
   "require": {
     "sinri/ark-core": "~2.0",
-    "phpmailer/phpmailer": "~6.0"
+    "phpmailer/phpmailer": "~6.1"
   },
   "autoload": {
     "psr-4": {
@@ -22,7 +22,7 @@
   "repositories": {
     "packagist": {
       "type": "composer",
-      "url": "https://packagist.laravel-china.org"
+      "url": "https://mirrors.aliyun.com/composer/"
     }
   }
 }
