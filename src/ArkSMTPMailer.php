@@ -9,8 +9,9 @@
 namespace sinri\ark\email;
 
 
-use Exception;
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use sinri\ark\email\exception\ArkMailException;
 
 /**
  * Class ArkSMTPMailer
@@ -98,11 +99,7 @@ class ArkSMTPMailer implements ArkMailer
         return $this;
     }
 
-    /**
-     * @param null $error
-     * @return ArkMailer
-     */
-    public function prepare(&$error = null)
+    public function prepare()
     {
         try {
             $this->phpMailerInstance = new PHPMailer();
@@ -118,9 +115,8 @@ class ArkSMTPMailer implements ArkMailer
             $this->phpMailerInstance->setFrom($this->smtpConfig->getUsername(), $this->smtpConfig->getDisplayName());
 
             $this->phpMailerInstance->isSMTP();
-        } catch (Exception $exception) {
-            // who care?
-            $error = $exception->getMessage();
+        } catch (Exception $e) {
+            throw new ArkMailException($e, __METHOD__ . ' Failed');
         }
         return $this;
     }
@@ -128,54 +124,78 @@ class ArkSMTPMailer implements ArkMailer
     private function turnHTML2TEXT($html)
     {
         $html = preg_replace('/<[Bb][Rr] *\/?>/', PHP_EOL, $html);
-        $html = strip_tags($html);
-        return $html;
+        return strip_tags($html);
+    }
+
+    /**
+     * @param string $address
+     * @param string $name
+     * @return ArkMailer
+     * @throws ArkMailException
+     */
+    public function addReceiver($address, $name = '')
+    {
+        if ($this->availableAddressList === null || in_array($address, $this->availableAddressList)) {
+            try {
+                $this->phpMailerInstance->addAddress($address, $name);
+            } catch (Exception $e) {
+                throw new ArkMailException($e, __METHOD__ . ' Failed: ' . $e->getMessage());
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $address
+     * @param string $name
+     * @return ArkMailer
+     * @throws ArkMailException
+     */
+    public function addReplyAddress($address, $name = '')
+    {
+        try {
+            $this->phpMailerInstance->addReplyTo($address, $name);
+        } catch (Exception $e) {
+            throw new ArkMailException($e,__METHOD__.' Failed: '.$e->getMessage());
+        }
+        return $this;
     }
 
     /**
      * @param $address
      * @param string $name
      * @return ArkMailer
+     * @throws ArkMailException
      */
-    public function addReceiver($address, $name = '')
+    public function addCCAddress($address, $name = '')
     {
         if ($this->availableAddressList === null || in_array($address, $this->availableAddressList))
-            $this->phpMailerInstance->addAddress($address, $name);
+        {
+            try {
+                $this->phpMailerInstance->addCC($address, $name);
+            } catch (Exception $e) {
+                throw new ArkMailException($e,__METHOD__.' Failed: '.$e->getMessage());
+            }
+        }
         return $this;
     }
 
     /**
      * @param $address
-     * @param $name
+     * @param string $name
      * @return ArkMailer
+     * @throws ArkMailException
      */
-    public function addReplyAddress($address, $name)
-    {
-        $this->phpMailerInstance->addReplyTo($address, $name);
-        return $this;
-    }
-
-    /**
-     * @param $address
-     * @param $name
-     * @return ArkMailer
-     */
-    public function addCCAddress($address, $name)
+    public function addBCCAddress($address, $name = '')
     {
         if ($this->availableAddressList === null || in_array($address, $this->availableAddressList))
-            $this->phpMailerInstance->addCC($address, $name);
-        return $this;
-    }
-
-    /**
-     * @param $address
-     * @param $name
-     * @return ArkMailer
-     */
-    public function addBCCAddress($address, $name)
-    {
-        if ($this->availableAddressList === null || in_array($address, $this->availableAddressList))
-            $this->phpMailerInstance->addBCC($address, $name);
+        {
+            try {
+                $this->phpMailerInstance->addBCC($address, $name);
+            } catch (Exception $e) {
+                throw new ArkMailException($e,__METHOD__.' Failed: '.$e->getMessage());
+            }
+        }
         return $this;
     }
 
@@ -183,11 +203,15 @@ class ArkSMTPMailer implements ArkMailer
      * @param $attachmentFile
      * @param string $name
      * @return ArkMailer
-     * @throws \PHPMailer\PHPMailer\Exception
+     * @throws ArkMailException
      */
     public function addAttachment($attachmentFile, $name = '')
     {
-        $this->phpMailerInstance->addAttachment($attachmentFile, $name);
+        try {
+            $this->phpMailerInstance->addAttachment($attachmentFile, $name);
+        } catch (Exception $e) {
+            throw new ArkMailException($e,__METHOD__.' Failed: '.$e->getMessage());
+        }
         return $this;
     }
 
@@ -224,17 +248,14 @@ class ArkSMTPMailer implements ArkMailer
     }
 
     /**
-     * @param null $error
-     * @return bool
+     * @throws ArkMailException
      */
-    public function finallySend(&$error = null)
+    public function finallySend()
     {
         try {
-            $done = $this->phpMailerInstance->send();
-        } catch (Exception $exception) {
-            $done = false;
+            $this->phpMailerInstance->send();
+        } catch (Exception $e) {
+            throw new ArkMailException($e,__METHOD__.' Failed: '.$e->getMessage());
         }
-        $error = $this->phpMailerInstance->ErrorInfo;
-        return $done;
     }
 }

@@ -8,13 +8,15 @@
 
 namespace sinri\ark\email;
 
+use sinri\ark\email\exception\ArkMailException;
+
 interface ArkMailer
 {
     /**
-     * @param null $error
+     * @throws ArkMailException
      * @return ArkMailer
      */
-    public function prepare(&$error = null);
+    public function prepare();
 
     /**
      * This should be set before adding methods.
@@ -25,62 +27,62 @@ interface ArkMailer
     public function setReceiverLimitation($emails);
 
     /**
-     * @param $address
+     * @param string $address
      * @param string $name
      * @return ArkMailer
      */
     public function addReceiver($address, $name = '');
 
     /**
-     * @param $address
-     * @param $name
-     * @return ArkMailer
-     */
-    public function addReplyAddress($address, $name);
-
-    /**
-     * @param $address
-     * @param $name
-     * @return ArkMailer
-     */
-    public function addCCAddress($address, $name);
-
-    /**
-     * @param $address
-     * @param $name
-     * @return ArkMailer
-     */
-    public function addBCCAddress($address, $name);
-
-    /**
-     * @param $attachmentFile
+     * @param string $address
      * @param string $name
      * @return ArkMailer
-     * @throws \Exception
+     */
+    public function addReplyAddress($address, $name='');
+
+    /**
+     * @param string $address
+     * @param string $name
+     * @return ArkMailer
+     */
+    public function addCCAddress($address, $name='');
+
+    /**
+     * @param string $address
+     * @param string $name
+     * @return ArkMailer
+     */
+    public function addBCCAddress($address, $name='');
+
+    /**
+     * @param string $attachmentFile
+     * @param string $name
+     * @return ArkMailer
+     * @throws ArkMailException
      */
     public function addAttachment($attachmentFile, $name = '');
 
     /**
-     * @param $subject
+     * @param string $subject
      * @return ArkMailer
      */
     public function setSubject($subject);
 
     /**
-     * @param $text
+     * @param string $text
      * @return ArkMailer
      */
     public function setTextBody($text);
 
     /**
-     * @param $htmlCode
+     * @param string $htmlCode
      * @return ArkMailer
      */
     public function setHTMLBody($htmlCode);
 
     /**
-     * @param null $error
-     * @return bool
+     * @throws ArkMailException
+     * @return void
      */
-    public function finallySend(&$error = null);
+    public function finallySend();
 }

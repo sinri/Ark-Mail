@@ -9,7 +9,11 @@
 //require_once __DIR__ . '/../vendor/autoload.php';
 //require_once __DIR__ . '/../autoload.php';
 
-$config = [
+use sinri\ark\email\ArkSMTPMailer;
+use sinri\ark\email\ArkSMTPMailerConfig;
+use sinri\ark\email\exception\ArkMailException;
+
+$config = new ArkSMTPMailerConfig([
     'host' => 'smtp.exmail.qq.com',
     'smtp_auth' => true,
     'username' => '',
@@ -17,13 +21,15 @@ $config = [
     'smtp_secure' => 'ssl',
     'port' => 465,
     'display_name' => 'Ark Mailer Tester',
-];
+]);
 
-$mailer = new \sinri\ark\email\ArkSMTPMailer($config);
-$sent = $mailer->prepare()
-    ->addReceiver("ljni@leqee.com", 'DANI')
-    ->setSubject(__FILE__)
-    ->setHTMLBody("<p style='color:red'>" . __LINE__ . "</p>")
-    ->finallySend();
-
-var_dump($sent);
+$mailer = new ArkSMTPMailer($config);
+try {
+    $mailer->prepare()
+        ->addReceiver("support@beian.gov.cn", '公安部网络安全保卫局')
+        ->setSubject(__FILE__)
+        ->setHTMLBody("<p style='color:red'>" . __LINE__ . "</p>")
+        ->finallySend();
+} catch (ArkMailException $e) {
+    echo $e->getNestedMessage();
+}

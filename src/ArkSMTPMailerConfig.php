@@ -38,7 +38,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @return mixed|null
+     * @return string|null
      */
     public function getHost()
     {
@@ -46,7 +46,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @param mixed|null $host
+     * @param string $host
      */
     public function setHost($host)
     {
@@ -54,7 +54,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @return mixed|null
+     * @return bool|null
      */
     public function getSmtpAuth()
     {
@@ -62,7 +62,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @param mixed|null $smtpAuth
+     * @param bool $smtpAuth
      */
     public function setSmtpAuth($smtpAuth)
     {
@@ -70,7 +70,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @return mixed|null
+     * @return string|null
      */
     public function getUsername()
     {
@@ -78,7 +78,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @param mixed|null $username
+     * @param string $username
      */
     public function setUsername($username)
     {
@@ -86,7 +86,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @return mixed|null
+     * @return string|null
      */
     public function getPassword()
     {
@@ -94,7 +94,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @param mixed|null $password
+     * @param string $password
      */
     public function setPassword($password)
     {
@@ -102,7 +102,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @return mixed|null
+     * @return string|null
      */
     public function getSmtpSecure()
     {
@@ -110,7 +110,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @param mixed|null $smtpSecure
+     * @param string $smtpSecure
      */
     public function setSmtpSecure($smtpSecure)
     {
@@ -118,7 +118,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @return mixed|null
+     * @return int|null
      */
     public function getPort()
     {
@@ -126,7 +126,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @param mixed|null $port
+     * @param int $port
      */
     public function setPort($port)
     {
@@ -134,7 +134,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @return mixed|null
+     * @return string|null
      */
     public function getDisplayName()
     {
@@ -142,7 +142,7 @@ class ArkSMTPMailerConfig
     }
 
     /**
-     * @param mixed|null $displayName
+     * @param string $displayName
      */
     public function setDisplayName($displayName)
     {
