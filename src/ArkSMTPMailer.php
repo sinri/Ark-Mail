@@ -33,7 +33,7 @@ class ArkSMTPMailer implements ArkMailer
      *
      * host,smtp_auth,username,password,smtp_secure,port,display_name
      */
-    public function __construct($smtpConfig)
+    public function __construct(ArkSMTPMailerConfig $smtpConfig)
     {
         $this->smtpConfig = $smtpConfig;
         $this->phpMailerInstance = new PHPMailer();
@@ -41,26 +41,27 @@ class ArkSMTPMailer implements ArkMailer
 
     /**
      * @param string[] $emails
-     * @return void
+     * @return $this
      */
     public function setReceiverLimitation($emails)
     {
         $this->availableAddressList = $emails;
+        return $this;
     }
 
     /**
      * @return PHPMailer
      */
-    public function getPhpMailerInstance()
+    public function getPhpMailerInstance(): PHPMailer
     {
         return $this->phpMailerInstance;
     }
 
     /**
      * @param int $target 0 for no debug, 4 for full debug
-     * @return ArkMailer
+     * @return $this
      */
-    public function setDebug($target = 0)
+    public function setDebug(int $target = 0)
     {
         $this->phpMailerInstance->SMTPDebug = $target;
         return $this;
@@ -70,7 +71,7 @@ class ArkSMTPMailer implements ArkMailer
      * @param string $charset PHPMailer::CHARSET_ISO88591 | CHARSET_UTF8
      * @return $this
      */
-    public function setCharset($charset)
+    public function setCharset(string $charset)
     {
         $this->phpMailerInstance->CharSet = $charset;
         return $this;
@@ -85,7 +86,7 @@ class ArkSMTPMailer implements ArkMailer
      * 2017-07-18 06:00:18     Connection failed. Error #2: stream_socket_client(): Failed to enable crypto [~/enoch/SmallPHPMail/SMTP.php line 294]
      * 2017-07-18 06:00:18     Connection failed. Error #2: stream_socket_client(): unable to connect to ssl://smtp.exmail.qq.com:465 (Unknown error) [~/enoch/SmallPHPMail/SMTP.php line 294]
      *
-     * @return ArkMailer
+     * @return $this
      */
     public function stopSSLVerify()
     {
@@ -99,7 +100,11 @@ class ArkSMTPMailer implements ArkMailer
         return $this;
     }
 
-    public function prepare()
+    /**
+     * @return $this
+     * @throws ArkMailException
+     */
+    public function prepare(): ArkSMTPMailer
     {
         try {
             $this->phpMailerInstance = new PHPMailer();
@@ -121,7 +126,7 @@ class ArkSMTPMailer implements ArkMailer
         return $this;
     }
 
-    private function turnHTML2TEXT($html)
+    private function turnHTML2TEXT($html): string
     {
         $html = preg_replace('/<[Bb][Rr] *\/?>/', PHP_EOL, $html);
         return strip_tags($html);
@@ -130,7 +135,7 @@ class ArkSMTPMailer implements ArkMailer
     /**
      * @param string $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      * @throws ArkMailException
      */
     public function addReceiver($address, $name = '')
@@ -148,7 +153,7 @@ class ArkSMTPMailer implements ArkMailer
     /**
      * @param string $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      * @throws ArkMailException
      */
     public function addReplyAddress($address, $name = '')
@@ -164,7 +169,7 @@ class ArkSMTPMailer implements ArkMailer
     /**
      * @param $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      * @throws ArkMailException
      */
     public function addCCAddress($address, $name = '')
@@ -183,7 +188,7 @@ class ArkSMTPMailer implements ArkMailer
     /**
      * @param $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      * @throws ArkMailException
      */
     public function addBCCAddress($address, $name = '')
@@ -200,9 +205,9 @@ class ArkSMTPMailer implements ArkMailer
     }
 
     /**
-     * @param $attachmentFile
+     * @param string $attachmentFile
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      * @throws ArkMailException
      */
     public function addAttachment($attachmentFile, $name = '')
@@ -217,7 +222,7 @@ class ArkSMTPMailer implements ArkMailer
 
     /**
      * @param $subject
-     * @return ArkMailer
+     * @return $this
      */
     public function setSubject($subject)
     {
@@ -227,7 +232,7 @@ class ArkSMTPMailer implements ArkMailer
 
     /**
      * @param $text
-     * @return ArkMailer
+     * @return $this
      */
     public function setTextBody($text)
     {
@@ -237,7 +242,7 @@ class ArkSMTPMailer implements ArkMailer
 
     /**
      * @param $htmlCode
-     * @return ArkMailer
+     * @return $this
      */
     public function setHTMLBody($htmlCode)
     {

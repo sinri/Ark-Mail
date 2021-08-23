@@ -14,7 +14,7 @@ interface ArkMailer
 {
     /**
      * @throws ArkMailException
-     * @return ArkMailer
+     * @return $this
      */
     public function prepare();
 
@@ -22,61 +22,61 @@ interface ArkMailer
      * This should be set before adding methods.
      * NULL for no limit and array of email address strings as limitation
      * @param string[]|null $emails
-     * @return void
+     * @return $this
      */
     public function setReceiverLimitation($emails);
 
     /**
      * @param string $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      */
     public function addReceiver($address, $name = '');
 
     /**
      * @param string $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      */
     public function addReplyAddress($address, $name='');
 
     /**
      * @param string $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      */
     public function addCCAddress($address, $name='');
 
     /**
      * @param string $address
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      */
     public function addBCCAddress($address, $name='');
 
     /**
      * @param string $attachmentFile
      * @param string $name
-     * @return ArkMailer
+     * @return $this
      * @throws ArkMailException
      */
     public function addAttachment($attachmentFile, $name = '');
 
     /**
      * @param string $subject
-     * @return ArkMailer
+     * @return $this
      */
     public function setSubject($subject);
 
     /**
      * @param string $text
-     * @return ArkMailer
+     * @return $this
      */
     public function setTextBody($text);
 
     /**
      * @param string $htmlCode
-     * @return ArkMailer
+     * @return $this
      */
     public function setHTMLBody($htmlCode);
 
