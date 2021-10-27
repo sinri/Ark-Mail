@@ -36,7 +36,7 @@ class ArkSMTPMailer implements ArkMailer
     public function __construct(ArkSMTPMailerConfig $smtpConfig)
     {
         $this->smtpConfig = $smtpConfig;
-        $this->phpMailerInstance = new PHPMailer();
+        $this->phpMailerInstance = new PHPMailer(true);
     }
 
     /**
@@ -258,7 +258,9 @@ class ArkSMTPMailer implements ArkMailer
     public function finallySend()
     {
         try {
-            $this->phpMailerInstance->send();
+            if (!$this->phpMailerInstance->send()) {
+                throw new ArkMailException(null, '\PHPMailer\PHPMailer\PHPMailer::send RETURNED FALSE');
+            }
         } catch (Exception $e) {
             throw new ArkMailException($e,__METHOD__.' Failed: '.$e->getMessage());
         }
