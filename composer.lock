@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "12dec5fd0053364030d341091dcd1ca3",
-    "packages": [
-        {
-            "name": "phpmailer/phpmailer",
-            "version": "v6.5.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "dd803df5ad7492e1b40637f7ebd258fee5ca7355"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "b60cc7ae7c0d65083c4fec356d7ba593",
+  "packages": [
+    {
+      "name": "phpmailer/phpmailer",
+      "version": "v6.5.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/PHPMailer/PHPMailer.git",
+        "reference": "dd803df5ad7492e1b40637f7ebd258fee5ca7355"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/dd803df5ad7492e1b40637f7ebd258fee5ca7355",
                 "reference": "dd803df5ad7492e1b40637f7ebd258fee5ca7355",
@@ -146,26 +146,26 @@
             },
             "time": "2021-05-03T11:20:27+00:00"
         },
-        {
-            "name": "sinri/ark-core",
-            "version": "2.7.20",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sinri/Ark-Core.git",
-                "reference": "f8d148cd58d6248d26b20f760355d67c6e29be62"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sinri/Ark-Core/zipball/f8d148cd58d6248d26b20f760355d67c6e29be62",
-                "reference": "f8d148cd58d6248d26b20f760355d67c6e29be62",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
+    {
+      "name": "sinri/ark-core",
+      "version": "2.7.21",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/sinri/Ark-Core.git",
+        "reference": "5e4628bc9a53827f31b020520d3bd02dd415c219"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/sinri/Ark-Core/zipball/5e4628bc9a53827f31b020520d3bd02dd415c219",
+        "reference": "5e4628bc9a53827f31b020520d3bd02dd415c219",
+        "shasum": "",
+        "mirrors": [
+          {
+            "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+            "preferred": true
+          }
+        ]
+      },
             "require": {
                 "ext-json": "*",
                 "psr/log": "~1.0"
@@ -192,18 +192,20 @@
             "description": "The core components of Ark 2",
             "support": {
                 "issues": "https://github.com/sinri/Ark-Core/issues",
-                "source": "https://github.com/sinri/Ark-Core/tree/2.7.20"
+              "source": "https://github.com/sinri/Ark-Core/tree/2.7.21"
             },
-            "time": "2021-08-23T03:47:26+00:00"
-        }
-    ],
-    "packages-dev": [],
-    "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
-    "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+      "time": "2021-10-15T03:42:09+00:00"
+    }
+  ],
+  "packages-dev": [],
+  "aliases": [],
+  "minimum-stability": "stable",
+  "stability-flags": [],
+  "prefer-stable": false,
+  "prefer-lowest": false,
+  "platform": {
+    "php": ">=7.0"
+  },
+  "platform-dev": [],
+  "plugin-api-version": "2.1.0"
 }

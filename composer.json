@@ -20,6 +20,11 @@
       "sinri\\ark\\email\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "sinri\\ark\\email\\test\\": "test/"
+    }
+  },
   "repositories": {
     "packagist": {
       "type": "composer",
